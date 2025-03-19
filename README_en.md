@@ -196,6 +196,7 @@ QQ-Chat-Intimacy-Analyzer/
 - For low-activity groups (e.g., class groups), an overall activity penalty factor is applied so that even if most normalized metrics are high, the final score remains low to reflect the low interaction level.
 - The project utilizes multiprocessing for accelerated computation. It is recommended to run on machines with multiple CPU cores.
 - For proper display of Chinese characters in the charts, please ensure your system has the appropriate Chinese fonts installed (e.g., Microsoft YaHei).
+- Please note that my skills, time, and energy are a bit limited, so I might not be able to maintain this project very frequently. If you have any suggestions or feedback, feel free to open an issue, but I can’t promise a quick fix (lol).
 
 ## License
 
