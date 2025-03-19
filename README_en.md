@@ -47,9 +47,7 @@ This tool calculates seven key metrics based on chat records to evaluate the int
    - **Evaluation**:  
      - **0 to 300 seconds**: 0 seconds is ideal, and values of 300 seconds or more are considered slow.  
      - Normalization is performed using a linear function, for example:  
-       \[
-       \text{score} = \max(0, 1 - (\text{actual response time} / 300))
-       \]
+       score= max(0, 1 - (actual response time / 300))
        This ensures that lower response times yield higher scores.
 
 2. **Chat Frequency**  
@@ -57,9 +55,7 @@ This tool calculates seven key metrics based on chat records to evaluate the int
    - **Evaluation**:  
      - A threshold (e.g., 0.5 messages per day per user) is defined as a baseline. If the frequency is below this threshold, the score is calculated proportionally; if it meets or exceeds the threshold, the score is capped at 1.  
      - For example:  
-       \[
-       \text{score} = \min(1.0, \text{frequency} / 0.5)
-       \]
+       score} = \min(1.0,frequency / 0.5)
 
 3. **Interaction Continuity**  
    - **Definition**: Measures the average number of consecutive rounds in which the conversation continues without a long break (defined as an interval exceeding 60 seconds).  
@@ -84,9 +80,7 @@ This tool calculates seven key metrics based on chat records to evaluate the int
    - **Evaluation**:  
      - A threshold (e.g., 5 replies) is set; if the reply count is below the threshold, the score is the ratio of the actual count to the threshold, and if it meets or exceeds the threshold, the score is capped at 1.  
      - For example:  
-       \[
-       \text{score} = \min(1.0, \text{reply count} / 5)
-       \]
+       score = min(1.0,reply count / 5)
 
 7. **Dialogue Continuity**  
    - **Definition**: Measures the proportion of cases where one user receives a reply within 60 seconds after sending a message, reflecting the continuity of the conversation.  
