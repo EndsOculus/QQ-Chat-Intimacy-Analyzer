@@ -24,7 +24,7 @@ def extract_chat_data(db_path: str, group_id: int) -> pd.DataFrame:
 
     参数：
         db_path: 数据库文件路径，例如 "nt_msg.clean.db"。
-        group_id: 指定的群聊号码，例如 951628619 或 457747541。
+        group_id: 指定的群聊号码。
 
     返回：
         DataFrame，包含以下字段：
@@ -84,11 +84,3 @@ def extract_chat_data(db_path: str, group_id: int) -> pd.DataFrame:
     df.drop(columns=['group_nickname', 'qq_name'], inplace=True)
 
     return df
-
-# 测试代码（可删除）
-if __name__ == "__main__":
-    db_file = "nt_msg.clean.db"
-    group = 951628619
-    data = extract_chat_data(db_file, group)
-    print(f"提取到 {len(data)} 条消息记录")
-    print(data.head())
