@@ -1,3 +1,4 @@
+[Click here to view the English version of the README](https://github.com/EndsOculus/QQ-Chat-Intimacy-Analyzer/blob/main/README_en.md)
 # QQ 群聊互动亲密度分析工具
 
 本项目提供一个用于分析 QQ 群聊中用户互动亲密度的工具。  
