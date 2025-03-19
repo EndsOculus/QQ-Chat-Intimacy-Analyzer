@@ -258,20 +258,3 @@ def calculate_intimacy_metrics(df: pd.DataFrame, user_name_map: dict = None, foc
     metrics_df.sort_values('closeness_score', ascending=False, inplace=True)
     metrics_df.reset_index(drop=True, inplace=True)
     return metrics_df
-
-if __name__ == "__main__":
-    import datetime
-    data = {
-        'sender_id': [10000, 2232021467, 10000, 2232021467],
-        'sender_nickname': ['Alice(10000)', 'Sharen2020(2232021467)', 'Alice(10000)', 'Sharen2020(2232021467)'],
-        'content': ['你好', '回复：我同意', '谢谢', '回复：很好'],
-        'timestamp': [
-            datetime.datetime.now(),
-            datetime.datetime.now() + datetime.timedelta(seconds=10),
-            datetime.datetime.now() + datetime.timedelta(seconds=20),
-            datetime.datetime.now() + datetime.timedelta(seconds=25)
-        ]
-    }
-    df_test = pd.DataFrame(data)
-    metrics = calculate_intimacy_metrics(df_test)
-    print(metrics)
