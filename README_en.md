@@ -38,6 +38,78 @@ The tool extracts chat records from an unencrypted SQLite database, cleans and n
   - If no date is entered, the tool analyzes all available data.  
   - If only a start date is entered, the analysis is performed from that date onward; if only an end date is entered, analysis is done up to that date.
 
+## Explanation and Evaluation Criteria for Metrics
+
+This tool calculates seven key metrics based on chat records to evaluate the intimacy (interaction closeness) between QQ users. The overall intimacy score is computed using a weighted sum of these normalized metrics. Here is what each metric means and how it is evaluated:
+
+1. **Average Response Time**  
+   - **Definition**: Measures the average time interval (in seconds) between alternating messages. A shorter response time indicates a more prompt reply and closer interaction.  
+   - **Evaluation**:  
+     - **0 to 300 seconds**: 0 seconds is ideal, and values of 300 seconds or more are considered slow.  
+     - Normalization is performed using a linear function, for example:  
+       \[
+       \text{score} = \max(0, 1 - (\text{actual response time} / 300))
+       \]
+       This ensures that lower response times yield higher scores.
+
+2. **Chat Frequency**  
+   - **Definition**: The number of messages exchanged per day, reflecting the overall activity level between two users.  
+   - **Evaluation**:  
+     - A threshold (e.g., 0.5 messages per day per user) is defined as a baseline. If the frequency is below this threshold, the score is calculated proportionally; if it meets or exceeds the threshold, the score is capped at 1.  
+     - For example:  
+       \[
+       \text{score} = \min(1.0, \text{frequency} / 0.5)
+       \]
+
+3. **Interaction Continuity**  
+   - **Definition**: Measures the average number of consecutive rounds in which the conversation continues without a long break (defined as an interval exceeding 60 seconds).  
+   - **Evaluation**:  
+     - If the average consecutive rounds are very low (e.g., less than 1), it indicates the conversation is sporadic; if the average is 1 or more, the score increases proportionally.  
+     - A simple proportional function can be used to normalize this metric.
+
+4. **Reciprocity**  
+   - **Definition**: Reflects the balance in message counts between the two users. It is computed as the ratio of the smaller message count to the larger one.  
+   - **Evaluation**:  
+     - A value close to 1 means both users are equally active, while a value closer to 0 indicates one-sided communication.  
+     - Since the ratio is already between 0 and 1, it can be used directly.
+
+5. **Message Length**  
+   - **Definition**: The average number of characters per message, indicating the depth of communication.  
+   - **Evaluation**:  
+     - An ideal average message length is set (e.g., 50 characters) with a tolerance range.  
+     - A non-linear mapping (such as using a Gaussian function) is applied to map the actual average length to a score between 0 and 1, with values around the ideal length receiving the highest score.
+
+6. **Reply Count**  
+   - **Definition**: The total number of times the two users alternate replies (i.e., the count of alternating messages).  
+   - **Evaluation**:  
+     - A threshold (e.g., 5 replies) is set; if the reply count is below the threshold, the score is the ratio of the actual count to the threshold, and if it meets or exceeds the threshold, the score is capped at 1.  
+     - For example:  
+       \[
+       \text{score} = \min(1.0, \text{reply count} / 5)
+       \]
+
+7. **Dialogue Continuity**  
+   - **Definition**: Measures the proportion of cases where one user receives a reply within 60 seconds after sending a message, reflecting the continuity of the conversation.  
+   - **Evaluation**:  
+     - A higher proportion indicates more seamless and continuous interaction.  
+     - A threshold (e.g., 0.5) may be used, and the score is computed as the minimum of 1.0 and the ratio of the observed value to the threshold.
+
+**Overall Activity Penalty Factor**  
+In addition to the individual metrics, an overall activity penalty factor is applied if the total number of messages in the group is low (e.g., less than 1000 messages). The final intimacy score is multiplied by the factor \((\text{total messages} / 1000)\), ensuring that in low-activity groups (such as class groups) the overall score reflects the lower level of interaction.
+
+**Default Weight Distribution**  
+By default, the tool uses the following weight distribution (summing to 1):
+
+- **Average Response Time**: 20%
+- **Chat Frequency**: 20%
+- **Interaction Continuity**: 15%
+- **Reciprocity**: 10%
+- **Message Length**: 10%
+- **Reply Count**: 20%
+- **Dialogue Continuity**: 5%
+
+These weights are used to compute the final intimacy score as the weighted sum of the normalized metrics. For instance, if a pair of users has excellent performance in most metrics except for a low reply count, the overall intimacy score will be reduced accordingly.
+
 ## Installation
 
 ### Clone the Repository
