@@ -31,7 +31,7 @@ The tool extracts chat records from an unencrypted SQLite database, cleans and n
   - Generates a radar chart displaying the normalized distribution of metrics.  
   - Generates a bar chart showing the top 20 user pairs with the highest intimacy scores. The bar chart automatically adjusts its vertical size to accommodate the labels.  
   - Generates a comparison chart to visually compare key metrics (average response time, average message length, reply count) for the user pair with the highest score.  
-  - User names are formatted uniformly as “Name\<QQ#\>” (with email parts automatically removed). If a name is too long, a smaller font size is used in the legend to accommodate the full name.
+  - User names are formatted uniformly as “Name<QQ ID>” (with email parts automatically removed). If a name is too long, a smaller font size is used in the legend to accommodate the full name.
 
 - **Time Range Filtering**  
   - Interactive prompt for specifying a start and end date in the format `YYYY/MM/DD`.  
@@ -55,7 +55,7 @@ This tool calculates seven key metrics based on chat records to evaluate the int
    - **Evaluation**:  
      - A threshold (e.g., 0.5 messages per day per user) is defined as a baseline. If the frequency is below this threshold, the score is calculated proportionally; if it meets or exceeds the threshold, the score is capped at 1.  
      - For example:  
-       score} = \min(1.0,frequency / 0.5)
+       score = min(1.0,frequency / 0.5)
 
 3. **Interaction Continuity**  
    - **Definition**: Measures the average number of consecutive rounds in which the conversation continues without a long break (defined as an interval exceeding 60 seconds).  
