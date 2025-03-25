@@ -146,7 +146,7 @@ python main.py --group 98765432 --db nt_msg.clean.db --mode group --id 98765432 
 ```bash
 python main.py --group 98765432 --db nt_msg.clean.db --focus-user 12345678 --mode group --id 98765432 --font "Microsoft YaHei"
 ```
-#### 私聊模式使用示例
+#### 私聊模式使用示例(开发中，暂不可用。)
 假如要分析与好友 QQ 号 87654321 的私聊数据：
 ```vbnet
 python main.py --group 98765432 --db nt_msg.clean.db --mode c2c --id 87654321 --font "Microsoft YaHei"
