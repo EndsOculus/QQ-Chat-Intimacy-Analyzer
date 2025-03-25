@@ -102,7 +102,7 @@ def main():
         return
 
     output_csv = f"intimacy_{group_id}.csv"
-    metrics_df.to_csv(output_csv, index=False, encoding="utf-8")
+    metrics_df.to_csv(output_csv, index=False, encoding="gbk")
     print(f"指标结果已保存到 {output_csv}")
 
     print("正在生成图表...")
