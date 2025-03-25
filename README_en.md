@@ -146,17 +146,35 @@ pip install pandas numpy matplotlib
   }
   ```
 
-### Running Examples
+## Parameter Description and Usage Examples
 
-#### Analyze the Entire Group Chat (e.g., group 98765432)
-```bash
+When running the program, provide the following command-line parameters:
+
+- `--group <groupID>`: Specify the QQ group number (required).
+- `--db <database_path>`: Specify the unencrypted SQLite database file path (required).
+- `--mode <group|c2c>`: Specify the mode; default is `group`. Use `c2c` for private chat mode.
+- `--id <groupID or friendQQ>`: In group mode, pass the group number; in c2c mode, pass the friend's QQ number.
+- `--focus-user <QQ number>`: (Optional) Specify a QQ number to focus on; only interactions involving that user are analyzed.
+- `--usermap <filepath>`: (Optional) Specify a JSON file for username mapping; if omitted, the database nickname is used.
+- `--top-n <number>`: (Optional) Specify the number of top user pairs to display in the bar chart; default is 20.
+- `--font <font name>`: (Optional) Specify the Chinese font (e.g., "Microsoft YaHei" or "SimHei") for chart display.
+
+### Usage Examples
+
+#### Analyze Entire Group Chat Data (e.g., group 98765432)
+```vbnet
 python main.py --group 98765432 --db nt_msg.clean.db --mode group --id 98765432 --font "Microsoft YaHei"
 ```
-
-#### Analyze the Interaction Data for a Specific User (e.g., QQ number 12345678)
-```bash
+#### Analyze Interactions for a Specific User (e.g., QQ 12345678) Within Group 98765432
+```vbnet
 python main.py --group 98765432 --db nt_msg.clean.db --focus-user 12345678 --mode group --id 98765432 --font "Microsoft YaHei"
 ```
+#### Private Chat Mode Example
+To analyze private chat data with a friend (e.g., friend QQ 87654321):
+```vbnet
+python main.py --group 98765432 --db nt_msg.clean.db --mode c2c --id 87654321 --font "Microsoft YaHei"
+```
+
 
 #### Interactive Time Range Filtering
 After running the command, the program will prompt you to enter a start and end date:
