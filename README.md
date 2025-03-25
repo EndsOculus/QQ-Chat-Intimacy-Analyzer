@@ -123,16 +123,33 @@
   }
   ```
 
-### 运行示例
+## 参数说明及使用示例
 
-#### 分析整个群聊（如群号 98765432）的数据
-```bash
+运行程序时，请通过命令行传入以下参数：
+
+- `--group <群号>`：指定群聊号码（必选）。
+- `--db <数据库文件路径>`：指定未加密的 SQLite 数据库文件路径（必选）。
+- `--mode <group|c2c>`：指定分析模式，默认为 `group`；若为 `c2c` 表示私聊模式。
+- `--id <群号或好友QQ号>`：当 `--mode` 为 `group` 时传入群号；若为 `c2c` 模式则传入好友 QQ 号。
+- `--focus-user <QQ号>`：可选，指定单个用户的 QQ 号，仅计算该用户与其他人的互动数据。
+- `--usermap <文件路径>`：可选，指定用户名映射 JSON 文件路径，若不提供则使用数据库中的昵称。
+- `--top-n <数字>`：可选，指定条形图中显示的用户对数，默认为 20（最多显示 20 对）。
+- `--font <字体名称>`：可选，指定中文字体（例如 "Microsoft YaHei" 或 "SimHei"），用于图表显示。
+
+### 使用示例
+
+#### 分析整个群聊的数据（例如群号 98765432）
+```vbnet
 python main.py --group 98765432 --db nt_msg.clean.db --mode group --id 98765432 --font "Microsoft YaHei"
 ```
-
 #### 分析特定用户（如 QQ 号 12345678）与他人的互动数据
 ```bash
 python main.py --group 98765432 --db nt_msg.clean.db --focus-user 12345678 --mode group --id 98765432 --font "Microsoft YaHei"
+```
+#### 私聊模式使用示例
+假如要分析与好友 QQ 号 87654321 的私聊数据：
+```vbnet
+python main.py --group 98765432 --db nt_msg.clean.db --mode c2c --id 87654321 --font "Microsoft YaHei"
 ```
 
 #### 交互式时间筛选
