@@ -169,7 +169,7 @@ python main.py --group 98765432 --db nt_msg.clean.db --mode group --id 98765432 
 ```vbnet
 python main.py --group 98765432 --db nt_msg.clean.db --focus-user 12345678 --mode group --id 98765432 --font "Microsoft YaHei"
 ```
-#### Private Chat Mode Example
+#### Private Chat Mode Example(In development, not available at this time)
 To analyze private chat data with a friend (e.g., friend QQ 87654321):
 ```vbnet
 python main.py --group 98765432 --db nt_msg.clean.db --mode c2c --id 87654321 --font "Microsoft YaHei"
